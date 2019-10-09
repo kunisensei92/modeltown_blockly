@@ -1,0 +1,536 @@
+<!-- <div class="overlay" id="overlay"></div>
+<div class="navbar-side" id="navbar_side">
+</div> -->
+
+<div class="footer">
+  <select class="language-menu" id="languageMenu"></select>
+</div>
+
+<div class="dashboard-wrap" id="dashboard_wrap">
+  <div class="overlay" id="overlay"></div>
+  <div class="dashboard" id="dashboard">
+    <div class="index" id="index">Shared Workspaces</div>
+    <div id="workspace_form">
+      <%= render "blocklies/workspaces/new" %>
+    </div>
+    <div class="workspaces" id="workspaces">
+      <%= render "blocklies/workspaces/index", workspaces: @workspaces %>
+    </div>
+  </div>
+</div>
+
+<table width="100%" height="100%">
+  <tr class="header" id="header">
+    <td>
+      <h1>ModelTown Blockly</h1>
+    </td>
+    <td class="farSide">
+      <!-- <button type="button"
+              class="navbar-toggler pull-xs-right"
+              id="navbar_sideButton">&#9776;</button> -->
+    </td>
+  </tr>
+  <tr id="workspace_header">
+    <td colspan=2>
+      <table width="100%">
+        <tr id="tabRow" class="tab-row">
+          <td id="tab_blocks" class="tabon">...</td>
+          <td class="tabmin">&nbsp;</td>
+          <td id="tab_javascript" class="taboff">JavaScript</td>
+          <td class="tabmin">&nbsp;</td>
+          <td id="tab_ruby" class="taboff">Ruby</td>
+          <td class="tabmin">&nbsp;</td>
+          <td id="tab_xml" class="taboff">XML</td>
+          <td class="tabmax">
+	  <div style="float:left; margin-left:30px;">
+	    <span style="font-size: 14px;color: #FFF;">NAME</span>
+            <input style="border: 2px solid #d80000;" id="username" onchange="setname()">
+	  </div>
+            <button id="trashButton" class="notext" title="...">
+              <%= image_tag("blocklies/1x1.gif", :class => "trash icon21") %>
+            </button>
+            <!-- <button id="linkButton" class="notext" title="...">
+              <%= image_tag("blocklies/1x1.gif", :class => "link icon21") %>
+            </button> -->
+	
+            <%= form_tag(run_blocklies_path, remote: true, class: "flat") do %>
+              <button id="runButton" class="notext primary" title="...">
+                <%= image_tag("blocklies/1x1.gif", :class => "run icon21") %>
+              </button>
+              <div id="runParams"></div>
+              <%= token_tag %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td height="99%" colspan=2 id="content_area">
+    </td>
+  </tr>
+</table>
+<div id="content_blocks" class="content-blocks content"></div>
+<pre id="content_javascript" class="content"></pre>
+<pre id="content_ruby" class="content"></pre>
+<textarea id="content_xml" class="content-xml content" wrap="off"></textarea>
+
+<div id="restoreModal" class="restore-modal">
+  <div class="modal-window">
+    <div class="modal-header">Saved programs</div>
+    <ul id="restoreList" class="program-list"></ul>
+    <div class="modal-footer">
+      <a id="closeModal">Cancel</a>
+    </div>
+  </div>
+</div>
+
+<xml class="toolbox" id="toolbox">
+  <category name="TechMage Basic" colour="%{BKY_COLOUR_HUE}">
+    <block type="minetest_mage_basic_add_node">
+      <value name="material">
+        <block type="minetest_dirt_block"></block>
+      </value>
+      <value name="x">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="z">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="minetest_add_node_onplayer">
+      <value name="material">
+        <block type="minetest_dirt_block"></block>
+      </value>
+      <value name="x">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="z">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <!--<block type="create_cube">
+      <value name="material">
+        <block type="minetest_dirt_block"></block>
+      </value>
+      <value name="x1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="y1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="z1">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="x2">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="y2">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="z2">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>-->
+    <block type="minetest_mage_basic_text_node">
+  	  <value name="x">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="z">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+  	  <value name="dx">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="dy">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="dz">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <!--<block type="minetest_mage_basic_teleport">
+      <value name="name">
+        <block type="text"></block>
+      </value>
+      <value name="x">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="z">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="minetest_mage_basic_teleport_all">
+      <value name="x">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="z">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>-->
+  </category>
+
+  <category name="TechMage Summons" colour="%{BKY_COLOUR_HUE}">
+    <block type="minetest_mage_summons_add_entity">
+      <value name="entity">
+        <block type="minetest_sheep_entity"></block>
+      </value>
+      <value name="x">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="y">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="z">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="minetest_mage_summons_detect_block">
+      <value name="material">
+        <block type="minetest_dirt_block"></block>
+      </value>
+    </block>
+    <block type="minetest_mage_summons_forever"></block>
+    <block type="minetest_mage_summons_move_forward"></block>
+    <block type="minetest_mage_summons_turn">
+      <field name="ACTION">turnLeft();</field>
+    </block>
+    <block type="minetest_mage_summons_turn">
+      <field name="ACTION">turnRight();</field>
+    </block>
+    <block type="minetest_mage_summons_wait">
+      <value name="seconds">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="minetest_mage_summons_wait_combobox"></block>
+    <block type="minetest_mage_summons_disappear"></block>
+    <block type="minetest_mage_summons_play_sound"></block>
+    <block type="minetest_mage_summons_destroy_block"></block>
+    <block type="minetest_mage_summons_place">
+      <value name="material">
+        <block type="minetest_dirt_block"></block>
+      </value>
+    </block>
+    <block type="minetest_mage_summons_place_ahead">
+      <value name="material">
+        <block type="minetest_dirt_block"></block>
+      </value>
+    </block>
+    <block type="minetest_mage_summons_drop">
+      <value name="item">
+        <block type="minetest_torch_item"></block>
+      </value>
+    </block>
+  </category>
+
+  <category name="Blocks" colour="%{BKY_COLOUR_HUE}">
+    <block type="minetest_wool_random_block"></block>
+    <block type="minetest_wool_white_block"></block>
+    <block type="minetest_wool_grey_block"></block>
+    <block type="minetest_wool_dark_grey_block"></block>
+    <block type="minetest_wool_black_block"></block>
+    <block type="minetest_wool_blue_block"></block>
+    <block type="minetest_wool_cyan_block"></block>
+    <block type="minetest_wool_green_block"></block>
+    <block type="minetest_wool_dark_green_block"></block>
+    <block type="minetest_wool_yellow_block"></block>
+    <block type="minetest_wool_orange_block"></block>
+    <block type="minetest_wool_brown_block"></block>
+    <block type="minetest_wool_red_block"></block>
+    <block type="minetest_wool_pink_block"></block>
+    <block type="minetest_wool_magenta_block"></block>
+    <block type="minetest_wool_violet_block"></block>
+    <block type="minetest_air_block"></block>
+    <block type="minetest_bookshelf_block"></block>
+    <block type="minetest_brick_block"></block>
+    <block type="minetest_dirt_block"></block>
+    <block type="minetest_glass_block"></block>
+    <block type="minetest_stone_block"></block>
+    <block type="minetest_wood_block"></block>
+    <block type="minetest_gold_block"></block>
+    <block type="minetest_diamond_block"></block>
+  </category>
+
+  <category name="Items" colour="%{BKY_COLOUR_HUE}">
+    <block type="minetest_torch_item"></block>
+  </category>
+
+  <category name="Entities" colour="%{BKY_COLOUR_HUE}">
+    <block type="minetest_chicken_entity"></block>
+    <block type="minetest_sheep_entity"></block>
+  </category>
+
+  <sep></sep>
+
+  <category name="%{BKY_CATLOGIC}" colour="%{BKY_LOGIC_HUE}">
+    <block type="controls_if"></block>
+    <block type="logic_compare"></block>
+    <block type="logic_operation"></block>
+    <block type="logic_negate"></block>
+    <block type="logic_boolean"></block>
+  </category>
+
+  <category name="%{BKY_CATLOOPS}" colour="%{BKY_LOOPS_HUE}">
+    <block type="controls_repeat_ext">
+      <value name="TIMES">
+        <shadow type="math_number">
+          <field name="NUM">10</field>
+        </shadow>
+      </value>
+    </block>
+
+    <block type="controls_for">
+      <value name="FROM">
+        <block type="math_number">
+          <field name="NUM">1</field>
+        </block>
+      </value>
+      <value name="TO">
+        <block type="math_number">
+          <field name="NUM">10</field>
+        </block>
+      </value>
+      <value name="BY">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
+
+  <!--<category name="%{BKY_CATMATH}" colour="%{BKY_MATH_HUE}">
+    <block type="math_number"></block>
+
+    <block type="math_change">
+      <value name="DELTA">
+        <block type="math_number">
+          <field name="NUM">1</field>
+        </block>
+      </value>
+    </block>
+
+    <block type="math_arithmetic">
+      <value name="A">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="B">
+        <shadow type="variables_get">
+          <field name="VAR">i</field>
+        </shadow>
+      </value>
+    </block>
+
+    <block type="math_modulo">
+      <value name="DIVIDEND">
+        <shadow type="variables_get">
+          <field name="VAR">i</field>
+        </shadow>
+      </value>
+      <value name="DIVISOR">
+        <shadow type="math_number">
+          <field name="NUM">3</field>
+        </shadow>
+      </value>
+    </block>
+
+    <block type="math_random_int">
+      <value name="FROM">
+        <shadow type="math_number">
+          <field name="NUM">-1</field>
+        </shadow>
+      </value>
+      <value name="TO">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
+  </category>-->
+
+
+  <category name="%{BKY_CATMATH}" colour="%{BKY_MATH_HUE}">
+      <block type="math_number">
+        <field name="NUM">123</field>
+      </block>
+      <block type="math_arithmetic">
+        <value name="A">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="B">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_single">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">9</field>
+          </shadow>
+        </value>
+      </block>
+      <!--block type="math_trig">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">45</field>
+          </shadow>
+        </value>
+      </block-->
+      <!--block type="math_constant"></block>
+      <block type="math_number_property">
+        <value name="NUMBER_TO_CHECK">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block-->
+      <block type="math_round">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">3.1</field>
+          </shadow>
+        </value>
+      </block>
+      <!--block type="math_on_list"></block-->
+      <!--block type="math_modulo">
+        <value name="DIVIDEND">
+          <shadow type="math_number">
+            <field name="NUM">64</field>
+          </shadow>
+        </value>
+        <value name="DIVISOR">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block-->
+      <!--block type="math_constrain">
+        <value name="VALUE">
+          <shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <value name="LOW">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="HIGH">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block-->
+    <block type="math_modulo">
+      <value name="DIVIDEND">
+        <shadow type="variables_get">
+          <field name="VAR">i</field>
+        </shadow>
+      </value>
+      <value name="DIVISOR">
+        <shadow type="math_number">
+          <field name="NUM">3</field>
+        </shadow>
+      </value>
+    </block>
+      <block type="math_random_int">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+    <block type="math_change">
+      <value name="DELTA">
+        <block type="math_number">
+          <field name="NUM">1</field>
+        </block>
+      </value>
+    </block>
+      <!--block type="math_random_float"></block-->
+    </category>
+  <sep></sep>
+  <category name="%{BKY_CATVARIABLES}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
+  <category name="%{BKY_CATFUNCTIONS}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
+</xml>

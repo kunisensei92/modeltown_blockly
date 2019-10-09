@@ -1,0 +1,12 @@
+$("#workspace_form")
+  .html('<%= j( render "form", workspace: Workspace.new ) %>');
+
+$("#workspaces")
+  .html('<%= j( render "index", workspaces: @workspaces ) %>');
+
+<% if @status == "success" %>
+  $("#dashboard_wrap #dashboard").removeClass("open")
+  $("#overlay").hide()
+<% else %>
+  alertify.alert("Error")
+<% end %>
